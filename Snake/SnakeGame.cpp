@@ -2,14 +2,13 @@
 #include <thread>
 #include <chrono>
 #include <iostream>
+#include "includes/Snake.h"
 
 using namespace std;
 
 int main() {
-    sf::RenderWindow window(sf::VideoMode(1280, 720), "Snake");
-    sf::CircleShape player(100.f);
-    player.setFillColor(sf::Color::Green);
-
+    sf::RenderWindow window(sf::VideoMode(1280, 720), "SnakeGame");    
+    Snake snake;
     while (window.isOpen()) {
         sf::Event event;
         while (window.pollEvent(event)) {
@@ -28,21 +27,21 @@ int main() {
 
         // Player movement
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W)) {
-			player.move(0, -0.1f);
+			snake.move(sf::Keyboard::Key::W);
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A)) {
-            player.move(-0.1f, 0);
+            snake.move(sf::Keyboard::Key::A);
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S)) {
-            player.move(0, 0.1f);
+            snake.move(sf::Keyboard::Key::S);
         }
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D)) {
-            player.move(0.1f, 0);
+            snake.move(sf::Keyboard::Key::D);
         }
 
 
         window.clear();
-        window.draw(player);
+        snake.draw(window);
         window.display();
     }
 
